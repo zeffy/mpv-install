@@ -19,10 +19,6 @@ set mpv_args=
 set mpv_path=%~dp0mpv.exe
 if not exist "%mpv_path%" call :die "mpv.exe not found"
 
-:: Get mpv-document.ico location
-set icon_path=%~dp0mpv-document.ico
-if not exist "%icon_path%" call :die "mpv-document.ico not found"
-
 :: Register mpv.exe under the "App Paths" key, so it can be found by
 :: ShellExecute, the run command, the start menu, etc.
 set app_paths_key=HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\mpv.exe
@@ -255,7 +251,7 @@ exit 0
 	call :reg add "%prog_id_key%" /d "%friendly_name%" /f
 	call :reg add "%prog_id_key%" /v "EditFlags" /t REG_DWORD /d 4259840 /f
 	call :reg add "%prog_id_key%" /v "FriendlyTypeName" /d "%friendly_name%" /f
-	call :reg add "%prog_id_key%\DefaultIcon" /d "%icon_path%" /f
+	call :reg add "%prog_id_key%\DefaultIcon" /d "%mpv_path%" /f
 	call :add_verbs "%prog_id_key%"
 
 	goto :EOF
